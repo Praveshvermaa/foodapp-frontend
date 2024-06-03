@@ -53,6 +53,7 @@ function About() {
       </div>
         ))
       }
+     
    
     {!cartnoti?<div className='text-xl font-bold text-white underline text-center'>The order box is empty!</div>:""}
 

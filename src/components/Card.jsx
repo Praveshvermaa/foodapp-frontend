@@ -5,11 +5,16 @@ import { useNavigate } from 'react-router-dom';
 
 function Card(props) {
     const navigate = useNavigate()
-    const half = props.price.half;
+    const half = props.price.large;
     const [tprice, setTprice] = useState(half)
-    const [ishalf, setishalf] = useState('half')
+    const [ishalf, setishalf] = useState('large')
 
     const [quantity, setquantity] = useState(1)
+
+    const obj = props.price
+    const keys = Object.keys(obj);
+    
+
     
 
     
@@ -17,10 +22,10 @@ function Card(props) {
     const pricehandle = (e) => {
         setTprice(e.target.value)
         if (tprice==half) {
-            setishalf("full")       
+            setishalf("medium")       
         }
         else{
-            setishalf("half")
+            setishalf("large")
         
        } 
        
@@ -90,8 +95,8 @@ function Card(props) {
                         ))}
                     </select>
                     <select onChange={pricehandle} className='bg-gray-500 font-bold text-xs' name="" id="">
-                        <option id="half" value={props.price.half}>Half</option>
-                        <option id="full" value={props.price.full}>Full</option>
+                        <option id="half" value={props.price.large}>{keys[0]}</option>
+                        <option id="full" value={props.price.medium}>{keys[1]}</option>
                     </select>
                     <div className='inline text-sm'>Total price: US${total}</div>
                     <button onClick={carthandler} className='px-2 py-1 border-2 border-white rounded-md bg-sky-400 text-white'>Add to Cart</button>

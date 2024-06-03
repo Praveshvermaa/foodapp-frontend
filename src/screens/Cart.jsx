@@ -16,6 +16,7 @@ function Cart() {
     data = await data.json()
     if (data.success) {
       navigate("/")
+      localStorage.setItem("boolean",true)
       
     }
 
