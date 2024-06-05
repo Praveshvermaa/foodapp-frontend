@@ -32,6 +32,7 @@ function Cart() {
       body: JSON.stringify({ email: localStorage.getItem("email") })
     })
    const response = await data.json()
+   console.log(response.data);
    
     if (response) {
       
@@ -44,20 +45,20 @@ function Cart() {
     cartnotification()
     
   },[])
-const removecart = async (name) =>{
+const removecart = async (itemid) =>{
   let response = await fetch("https://foodapp-backend-l0u0.onrender.com/api/removecart",{
     method:"POST",
     headers: {
       'Content-Type': 'application/json'
     },
-    body:JSON.stringify({email:localStorage.getItem("email"),name:name})
+    body:JSON.stringify({email:localStorage.getItem("email"),id:itemid})
   })
   let checkout = await fetch("https://foodapp-backend-l0u0.onrender.com/api/removecartcheckout",{
     method:"POST",
     headers: {
       'Content-Type': 'application/json'
     },
-    body:JSON.stringify({email:localStorage.getItem("email"),name:name})
+    body:JSON.stringify({email:localStorage.getItem("email"),id:itemid})
   })
   response = await response.json()
   if (response.success) {
@@ -86,7 +87,7 @@ const removecart = async (name) =>{
                      <option className='bg-gray-500 font-bold px-2 py-1 ' value="">{item.amount}</option>
                 
                  <div className='inline text-xl text-black '>Total price: US${item.total}</div>
-                 <button onClick={()=>removecart(item.name)} className='px-2 py-1 border-2 border-white rounded-md bg-sky-400 text-white'> Remove from Cart</button>
+                 <button onClick={()=>removecart(item._id)} className='px-2 py-1 border-2 border-white rounded-md bg-sky-400 text-white'> Remove from Cart</button>
 
              </div>
             
