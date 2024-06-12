@@ -37,7 +37,8 @@ function Home() {
     
     return (
         <div>
-          <div className="flex items-center justify-center pt-28 mt-8">
+          <div className="flex flex-wrap justify-center pt-28 mt-8">
+
       <input
         type="search"
         placeholder="Enter your search term..."
@@ -48,12 +49,10 @@ function Home() {
      
     </div>
             
-            <main className="container mt-auto py-10">
-                <section className="text-center mb-10">
-                    <h2 className="text-4xl font-bold mb-4 text-white">Delicious Food Delivered To You</h2>
-                </section>
+           
+                
                
-                <section className="grid grid-cols-1   md:grid-cols-3 gap-6">
+                <section className="flex flex-wrap gap-6 justify-around">
                     {
                        categoryfood&&categoryfood.map((item)=>(
                         <div key={item._id}className=''>
@@ -71,7 +70,7 @@ function Home() {
 
                
                 </section>
-            </main>
+            
         </div>
     )
 }

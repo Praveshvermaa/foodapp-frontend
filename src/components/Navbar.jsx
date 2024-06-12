@@ -8,11 +8,12 @@ function Navbar() {
   const [cartnoti, setcartnoti] = useState([])
   
   const navigate = useNavigate()
+  let data;
  
   
 
   const cartnotification = async () => {
-    const data = await fetch("https://foodapp-backend-l0u0.onrender.com/api/cartnav", {
+     data = await fetch("https://foodapp-backend-l0u0.onrender.com/api/cartnav", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -41,7 +42,7 @@ function Navbar() {
   }, [])
   useEffect(()=>{
     cartnotification()
-  },[])
+  },[data])
   
   
   const logouthandle = () => {
@@ -64,11 +65,7 @@ function Navbar() {
             <NavLink to={'/cart'} className={({ isActive }) => isActive ? "font-bold text-white px-2 py-1 border-2 rounded-lg bg-sky-400 mr-1" : "font-bold text-white px-2 py-1 border-2 rounded-lg bg-sky-400 mr-1"}>
               Cart
 
-              <button type="button" class="relative inline-flex items-center p-2 text-sm font-medium text-center text-white  rounded-lg ">
-
-
-                <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">{cartnoti?.length}</div>
-              </button>
+             
 
             </NavLink>
             <button onClick={logouthandle} className='border-2 px-2 py-1 rounded-lg bg-sky-400 font-bold '>
