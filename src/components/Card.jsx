@@ -72,6 +72,7 @@ function Card(props) {
         response = await response.json()
         if (response.success) {
            navigate("/")
+           alert("food item added into cart")
            
             
         }

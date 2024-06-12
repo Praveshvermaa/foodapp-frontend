@@ -62,7 +62,9 @@ const removecart = async (itemid) =>{
   })
   response = await response.json()
   if (response.success) {
+    alert("food item removed from cart")
     navigate("/")
+    
   }
  
 
