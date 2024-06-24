@@ -7,7 +7,8 @@ function Card(props) {
     const navigate = useNavigate()
     const half = props.price.large;
     const [tprice, setTprice] = useState(half)
-    const [ishalf, setishalf] = useState('large')
+    const [ishalf, setishalf] = useState('large');
+    const [loading,setLoading]=useState(false);
 
     const [quantity, setquantity] = useState(1)
 
@@ -54,6 +55,7 @@ function Card(props) {
 
     }
     const carthandler =  async()=>{
+        setLoading(true);
         let response = await fetch("https://foodapp-backend-l0u0.onrender.com/api/cartdata",{
             method:"POST",
             headers: {
@@ -71,8 +73,11 @@ function Card(props) {
         
         response = await response.json()
         if (response.success) {
+            setLoading(false);
+            alert("food item added into cart")
+
            navigate("/")
-           alert("food item added into cart")
+          
            
             
         }
@@ -100,7 +105,7 @@ function Card(props) {
                         <option id="full" value={props.price.medium}>{keys[1]}</option>
                     </select>
                     <div className='inline text-sm'>Total price: US${total}</div>
-                    <button onClick={carthandler} className='px-2 py-1 border-2 border-white rounded-md bg-sky-400 text-white'>Add to Cart</button>
+                    <button onClick={carthandler} className='px-2 py-1 border-2 border-white rounded-md bg-sky-400 text-white'>{loading?"processing...":"Add to Cart"}</button>
                 </div>
 
             </div>

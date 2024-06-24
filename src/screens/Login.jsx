@@ -4,6 +4,7 @@ import { useNavigate,Link } from 'react-router-dom';
 const Login = () => {
   const [email,setEmail] = useState()
   const [password,setPassword] = useState()
+  const[loading,setLoading] = useState(false);
 
 
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const Login = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await fetch("https://foodapp-backend-l0u0.onrender.com/login",{
          method:"POST",
@@ -29,6 +31,7 @@ const Login = () => {
       if (data.success) {
         localStorage.setItem("email",email)
         localStorage.setItem("Token",data.user)
+        setLoading(false);
         navigate('/'); 
       }
       else if (!data) {
@@ -72,7 +75,7 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700">Login</button>
+        <button type="submit" className="w-full py-2 px-4 bg-blue-500 text-black font-bold rounded hover:bg-blue-700">{loading?"Processing...":"Login"}</button>
       </form>
       <h1 className=''> Account is created ?
         <Link to={'/register'} className='text-blue-800 text-xl font-bold underline mr-1'>Go Register</Link>

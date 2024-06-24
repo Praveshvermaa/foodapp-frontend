@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 function Cart() {
   const [cartnoti, setcartnoti] = useState([])
   const navigate = useNavigate()
+  const [loading,setLoading]=useState(false);
 
   const checkouthandler =  async()=>{
     let data = await fetch("https://foodapp-backend-l0u0.onrender.com/api/checkoutadd",{
@@ -46,6 +47,7 @@ function Cart() {
     
   },[])
 const removecart = async (itemid) =>{
+  setLoading(true);
   let response = await fetch("https://foodapp-backend-l0u0.onrender.com/api/removecart",{
     method:"POST",
     headers: {
@@ -62,6 +64,7 @@ const removecart = async (itemid) =>{
   })
   response = await response.json()
   if (response.success) {
+    setLoading(false);
     alert("food item removed from cart")
     navigate("/")
     
@@ -89,7 +92,7 @@ const removecart = async (itemid) =>{
                      <option className='bg-gray-500 font-bold px-2 py-1 ' value="">{item.amount}</option>
                 
                  <div className='inline text-xl text-black '>Total price: US${item.total}</div>
-                 <button onClick={()=>removecart(item._id)} className='px-2 py-1 border-2 border-white rounded-md bg-sky-400 text-white'> Remove from Cart</button>
+                 <button onClick={()=>removecart(item._id)} className='px-2 py-1 border-2 border-white rounded-md bg-sky-400 text-white'>{loading?"processing...":" Remove from Cart"}</button>
 
              </div>
             
